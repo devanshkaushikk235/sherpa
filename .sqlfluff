@@ -1,0 +1,25 @@
+[sqlfluff]
+dialect = snowflake
+templater = dbt
+runaway_limit = 10
+max_line_length = 100
+indent_unit = space
+indent_size = 4
+
+[sqlfluff:templater:dbt]
+project_dir = ./dbt_liveops
+profiles_dir = ./dbt_liveops
+
+[sqlfluff:indentation]
+indented_joins = false
+template_blocks_indent = true
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.functions]
+extended_capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.literals]
+capitalisation_policy = upper
+

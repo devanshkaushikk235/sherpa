@@ -1,0 +1,35 @@
+# ==============================================================================
+# dbt Profiles Configuration for Snowflake LiveOps Data Platform
+# Copy or merge this file into ~/.dbt/profiles.yml
+# ==============================================================================
+
+snowflake_liveops:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD', '') }}"
+      authenticator: "{{ env_var('SNOWFLAKE_AUTHENTICATOR', 'snowflake') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'LIVEOPS_ENGINEER') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'LIVEOPS_DW') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'LIVEOPS_WH') }}"
+      schema: STAGING
+      threads: 4
+      client_session_keep_alive: False
+      query_tag: "dbt_liveops_dev"
+
+    prod:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD', '') }}"
+      role: LIVEOPS_ENGINEER
+      database: LIVEOPS_DW
+      warehouse: LIVEOPS_WH
+      schema: ANALYTICS
+      threads: 8
+      client_session_keep_alive: False
+      query_tag: "dbt_liveops_prod"
+

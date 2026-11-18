@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: dim_games
+    description: "Dimension table representing tracked game titles, genre classifications, and historical CCU milestones."
+    columns:
+      - name: game_id
+        tests:
+          - unique
+          - not_null
+      - name: app_id
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_daily_player_concurrency
+    description: "Daily fact table of concurrent players joined with post-patch distance strata and moving window aggregations."
+    columns:
+      - name: ccu_key
+        tests:
+          - unique
+          - not_null
+      - name: game_id
+        tests:
+          - not_null
+      - name: date
+        tests:
+          - not_null
+      - name: post_patch_stratum
+        tests:
+          - accepted_values:
+              values: ['post_patch_0_7d', 'post_patch_8_14d', 'post_patch_15_30d', 'baseline_gt_30d']
+
+  - name: fct_patch_performance
+    description: "Executive summary fact table evaluating average launch surge % and retention decay profiles across major vs minor releases."
+    columns:
+      - name: performance_key
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_liveops_capacity_risk
+    description: "Simulated asymmetric capacity loss across under-provisioning penalty ratios r in (2x, 5x, 10x, 20x)."
+    columns:
+      - name: risk_key
+        tests:
+          - unique
+          - not_null
+

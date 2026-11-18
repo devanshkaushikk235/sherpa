@@ -1,0 +1,76 @@
+version: 2
+
+sources:
+  - name: raw
+    database: LIVEOPS_DW
+    schema: RAW
+    tables:
+      - name: steam_ccu_ingest
+        description: "Append-only bronze landing table containing SteamCharts CCU JSON payloads in VARIANT format."
+        columns:
+          - name: ingest_id
+            description: "Surrogate auto-increment key"
+            tests:
+              - unique
+              - not_null
+          - name: game_id
+            description: "Game slug (e.g. apex_legends, path_of_exile)"
+          - name: app_id
+            description: "Steam numeric application identifier"
+          - name: raw_payload
+            description: "Semi-structured JSON payload containing timestamp-player pairs"
+      - name: steam_news_ingest
+        description: "Bronze landing table containing Steam News API developer update announcements."
+        columns:
+          - name: ingest_id
+            tests:
+              - unique
+              - not_null
+          - name: raw_payload
+            description: "Semi-structured JSON payload containing developer news articles and patch notes"
+
+models:
+  - name: stg_steam_ccu
+    description: "Flattened and UTC-standardized daily player concurrency aggregates from raw sub-daily telemetry."
+    columns:
+      - name: ccu_key
+        description: "Deterministic surrogate key hash(game_id, date)"
+        tests:
+          - unique
+          - not_null
+      - name: game_id
+        tests:
+          - not_null
+      - name: date
+        tests:
+          - not_null
+      - name: y_peak
+        description: "Maximum concurrent players observed on this calendar day"
+        tests:
+          - not_null
+      - name: y_avg
+        description: "Mean concurrent players observed across sub-daily samples"
+        tests:
+          - not_null
+
+  - name: stg_steam_patches
+    description: "Parsed developer patch announcements tagged with major/minor release flags."
+    columns:
+      - name: patch_key
+        description: "Deterministic surrogate key hash(game_id, patch_id)"
+        tests:
+          - unique
+          - not_null
+      - name: game_id
+        tests:
+          - not_null
+      - name: patch_date
+        tests:
+          - not_null
+      - name: title
+        tests:
+          - not_null
+      - name: is_patch_candidate
+        tests:
+          - not_null
+

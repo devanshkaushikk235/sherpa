@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: int_daily_telemetry_cleaned
+    description: "Daily player telemetry enriched with rolling baselines, calendar features, and automated asymmetric outage detection."
+    columns:
+      - name: ccu_key
+        tests:
+          - unique
+          - not_null
+      - name: is_outage
+        description: "True if y_peak collapsed below 20% of the 15-day rolling median (server outage or API drop)"
+        tests:
+          - not_null
+
+  - name: int_patch_surge_windows
+    description: "Patch event windows (-7d to +7d) computing launch surge %, retention decay, and empirical shock magnitude M."
+    columns:
+      - name: patch_key
+        tests:
+          - unique
+          - not_null
+      - name: final_patch_type
+        tests:
+          - accepted_values:
+              values: ['major', 'minor']
+

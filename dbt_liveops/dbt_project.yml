@@ -1,0 +1,30 @@
+name: 'dbt_liveops'
+version: '1.0.0'
+config-version: 2
+
+# Profile matches profiles.yml entry
+profile: 'snowflake_liveops'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  dbt_liveops:
+    staging:
+      +materialized: view
+      +schema: STAGING
+    intermediate:
+      +materialized: table
+      +schema: STAGING
+    marts:
+      +materialized: table
+      +schema: ANALYTICS
+
