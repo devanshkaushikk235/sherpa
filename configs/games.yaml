@@ -1,0 +1,13 @@
+games:
+  apex_legends:
+    name: Apex Legends
+    app_id: 1172470
+    start: "2020-11-04"      # Steam release
+  path_of_exile:
+    name: Path of Exile
+    app_id: 238960
+    start: "2019-01-01"
+  team_fortress_2:
+    name: Team Fortress 2
+    app_id: 440
+    start: "2019-01-01"

@@ -1,0 +1,87 @@
+ingest:
+  sleep_seconds: 2.0
+  news_count: 100
+  news_max_pages: 60
+clean:
+  max_gap_days: 3        # gaps <= this are interpolated and flagged is_imputed
+  drop_ratio: 0.2        # value < ratio * centered rolling median => outage dip
+  drop_window: 15
+patches:
+  window_days: 7
+  major_threshold: 0.20
+  overlap_days: 7
+  feeds: ["steam_community_announcements"]
+  patch_regex: "patch|update|hotfix|hot fix|release notes|changelog|balance|season|league|expansion"
+  major_regex: "expansion|league (launch|start)|new season|season \\d+ launch"
+
+splits:
+  tune_fraction: 0.40
+  cutoffs:
+    apex_legends: "2022-04-22"
+    path_of_exile: "2021-03-14"
+    team_fortress_2: "2021-03-14"
+
+backtest:
+  train_min_days: 365       # Days 1..365 for initial training
+  calib_burnin_days: 90     # Days 366..455 for out-of-sample calibration residuals
+  horizon: 14               # 14-day direct forecasting
+  step_days: 7              # 7-day origin roll
+  refit_cadence_days: 7     # Explicit refit schedule: point forecaster retrained on every origin roll
+  levels: [0.8, 0.9, 0.95]
+
+models:
+  list: ["snaive", "lgbm"]
+
+lgbm:
+  lags: [1, 2, 3, 7, 14, 21, 28]
+  rolling_windows: [7, 14, 28]
+  calendar_features: ["dow", "day", "month", "is_weekend"]
+  n_estimators: 100
+  learning_rate: 0.05
+  num_leaves: 31
+  random_state: 42
+
+prophet:
+  yearly_seasonality: true
+  weekly_seasonality: true
+  daily_seasonality: false
+  changepoint_prior_scale: 0.05
+  seasonality_prior_scale: 10.0
+
+intervals:
+  fixed:
+    burnin_days: 90
+  rolling_conformal:
+    window_days: 90
+    min_samples: 30
+  triggered:
+    k: 0.5                  # CUSUM slack in std units
+    h: 3.0                  # CUSUM alarm threshold (tuned on TUNE split)
+    alarm_window_days: 21
+    cooldown_days: 14
+  aci:
+    gamma: 0.05             # Adaptive conformal step size (tuned on TUNE split)
+    window_days: 90
+    min_samples: 30
+  scheduled:
+    window_days: 90
+    patch_window_days: 7
+    inflation_factor: 1.25  # Tuned on TUNE split
+    min_samples: 30
+  hybrid:
+    gamma: 0.02             # Decoupled ACI step size
+    window_days: 90
+    patch_window_days: 7
+    inflation_factor: 1.25  # Tuned on TUNE split
+    decay_tau: 2.0          # Tuned on TUNE split
+    min_samples: 30
+
+windows:
+  post_patch: [[0, 7], [8, 14], [15, 30]]
+
+eval:
+  bootstrap:
+    block_days: 7
+    n_resamples: 2000
+  capacity_cost:
+    ratios: [2.0, 5.0, 10.0]
