@@ -1,0 +1,228 @@
+{
+  "split": "TUNE (earliest 40%)",
+  "tune_game": "path_of_exile",
+  "selected_parameters": {
+    "rolling_conformal": {
+      "window_days": 90,
+      "min_samples": 30
+    },
+    "triggered": {
+      "k": 0.5,
+      "h": 3.0,
+      "normal_window_days": 90,
+      "alarm_window_days": 21,
+      "cooldown_days": 14
+    },
+    "aci": {
+      "gamma": 0.05,
+      "window_days": 90,
+      "min_samples": 30
+    },
+    "scheduled": {
+      "window_days": 90,
+      "patch_window_days": 7,
+      "inflation_factor": 1.25,
+      "min_samples": 30
+    },
+    "hybrid": {
+      "gamma": 0.02,
+      "window_days": 90,
+      "patch_window_days": 7,
+      "inflation_factor": 1.25,
+      "decay_tau": 2.0,
+      "min_samples": 30
+    }
+  },
+  "grid_results": {
+    "rolling_conformal": [
+      {
+        "params": {
+          "window_days": 60,
+          "min_samples": 30
+        },
+        "overall_cov": 0.8705357142857143,
+        "overall_width": 92544.6225049444,
+        "patch_cov_0_7d": 0.880085653104925,
+        "patch_width_0_7d": 96980.8269274305
+      },
+      {
+        "params": {
+          "window_days": 90,
+          "min_samples": 30
+        },
+        "overall_cov": 0.8898809523809523,
+        "overall_width": 87215.41390541887,
+        "patch_cov_0_7d": 0.9014989293361885,
+        "patch_width_0_7d": 90823.96688898202
+      },
+      {
+        "params": {
+          "window_days": 120,
+          "min_samples": 30
+        },
+        "overall_cov": 0.8839285714285714,
+        "overall_width": 86261.69285906383,
+        "patch_cov_0_7d": 0.8950749464668094,
+        "patch_width_0_7d": 89732.82804778805
+      }
+    ],
+    "triggered": [
+      {
+        "params": {
+          "k": 0.5,
+          "h": 3.0,
+          "normal_window_days": 90,
+          "alarm_window_days": 21,
+          "cooldown_days": 14
+        },
+        "overall_cov": 0.9196428571428571,
+        "overall_width": 108180.09696227354,
+        "patch_cov_0_7d": 0.9250535331905781,
+        "patch_width_0_7d": 112387.20076665013
+      },
+      {
+        "params": {
+          "k": 0.5,
+          "h": 4.0,
+          "normal_window_days": 90,
+          "alarm_window_days": 21,
+          "cooldown_days": 14
+        },
+        "overall_cov": 0.9196428571428571,
+        "overall_width": 102276.82244132801,
+        "patch_cov_0_7d": 0.9250535331905781,
+        "patch_width_0_7d": 105703.3281476448
+      },
+      {
+        "params": {
+          "k": 0.5,
+          "h": 5.0,
+          "normal_window_days": 90,
+          "alarm_window_days": 21,
+          "cooldown_days": 14
+        },
+        "overall_cov": 0.9196428571428571,
+        "overall_width": 102276.82244132801,
+        "patch_cov_0_7d": 0.9250535331905781,
+        "patch_width_0_7d": 105703.3281476448
+      }
+    ],
+    "aci": [
+      {
+        "params": {
+          "gamma": 0.01,
+          "window_days": 90,
+          "min_samples": 30
+        },
+        "overall_cov": 0.8854166666666666,
+        "overall_width": 89255.05675207937,
+        "patch_cov_0_7d": 0.8972162740899358,
+        "patch_width_0_7d": 92337.56951760573
+      },
+      {
+        "params": {
+          "gamma": 0.02,
+          "window_days": 90,
+          "min_samples": 30
+        },
+        "overall_cov": 0.8869047619047619,
+        "overall_width": 91708.85585868197,
+        "patch_cov_0_7d": 0.9014989293361885,
+        "patch_width_0_7d": 95144.74806810325
+      },
+      {
+        "params": {
+          "gamma": 0.05,
+          "window_days": 90,
+          "min_samples": 30
+        },
+        "overall_cov": 0.8898809523809523,
+        "overall_width": 96208.01840633231,
+        "patch_cov_0_7d": 0.9143468950749465,
+        "patch_width_0_7d": 101295.91196079143
+      }
+    ],
+    "scheduled": [
+      {
+        "params": {
+          "window_days": 90,
+          "patch_window_days": 7,
+          "inflation_factor": 1.25,
+          "min_samples": 30
+        },
+        "overall_cov": 0.9136904761904762,
+        "overall_width": 106412.65310738533,
+        "patch_cov_0_7d": 0.9314775160599572,
+        "patch_width_0_7d": 115948.16605583821
+      },
+      {
+        "params": {
+          "window_days": 90,
+          "patch_window_days": 7,
+          "inflation_factor": 1.35,
+          "min_samples": 30
+        },
+        "overall_cov": 0.9241071428571429,
+        "overall_width": 114437.71556206082,
+        "patch_cov_0_7d": 0.9443254817987152,
+        "patch_width_0_7d": 126445.7985088564
+      },
+      {
+        "params": {
+          "window_days": 90,
+          "patch_window_days": 7,
+          "inflation_factor": 1.5,
+          "min_samples": 30
+        },
+        "overall_cov": 0.9389880952380952,
+        "overall_width": 126906.38733535202,
+        "patch_cov_0_7d": 0.9635974304068522,
+        "patch_width_0_7d": 142749.9671570595
+      }
+    ],
+    "hybrid": [
+      {
+        "params": {
+          "gamma": 0.02,
+          "window_days": 90,
+          "patch_window_days": 7,
+          "inflation_factor": 1.25,
+          "decay_tau": 2.0,
+          "min_samples": 30
+        },
+        "overall_cov": 0.9226190476190477,
+        "overall_width": 110068.22942075934,
+        "patch_cov_0_7d": 0.9464668094218416,
+        "patch_width_0_7d": 118238.21583090509
+      },
+      {
+        "params": {
+          "gamma": 0.02,
+          "window_days": 90,
+          "patch_window_days": 7,
+          "inflation_factor": 1.35,
+          "decay_tau": 2.5,
+          "min_samples": 30
+        },
+        "overall_cov": 0.9330357142857143,
+        "overall_width": 118173.83076412125,
+        "patch_cov_0_7d": 0.9593147751605996,
+        "patch_width_0_7d": 128452.63720503206
+      },
+      {
+        "params": {
+          "gamma": 0.02,
+          "window_days": 90,
+          "patch_window_days": 7,
+          "inflation_factor": 1.5,
+          "decay_tau": 3.0,
+          "min_samples": 30
+        },
+        "overall_cov": 0.9464285714285714,
+        "overall_width": 131022.3667478679,
+        "patch_cov_0_7d": 0.9764453961456103,
+        "patch_width_0_7d": 144614.8419205266
+      }
+    ]
+  }
+}

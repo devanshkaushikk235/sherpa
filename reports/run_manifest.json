@@ -1,0 +1,64 @@
+{
+  "project": "forecast-reliability",
+  "timestamp_utc": "2026-10-26T14:29:34.291605+00:00",
+  "git_commit_hash": "6e2d2c52c8e4bc400132faa1f061d1cb2389bfe8",
+  "config_sha256": "fd601092714c",
+  "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "random_seeds": {
+    "global": 42,
+    "bootstrap": 42,
+    "lgbm": 42
+  },
+  "dataset_summary": {
+    "total_raw_patches": 317,
+    "tune_patches_pooled": 106,
+    "tune_patches_poe_selected_for_tuning": 86,
+    "eval_patches_pooled": 211,
+    "eval_patches_in_0_7d_window": 211,
+    "patches_by_split_and_game": {
+      "tune": {
+        "apex_legends": 13,
+        "path_of_exile": 86,
+        "team_fortress_2": 7
+      },
+      "eval": {
+        "apex_legends": 12,
+        "path_of_exile": 117,
+        "team_fortress_2": 82
+      }
+    }
+  },
+  "forecast_and_interval_counts": {
+    "total_forecast_rows_across_all_models_and_splits": 15792,
+    "primary_model_eval_forecast_points": 6328,
+    "total_eval_forecast_rows_all_models": 12656,
+    "total_interval_rows_evaluated": 284256,
+    "primary_nominal_level": 0.9,
+    "evaluated_nominal_levels": [
+      0.8,
+      0.9,
+      0.95
+    ],
+    "evaluated_models": [
+      "lgbm",
+      "snaive"
+    ],
+    "evaluated_arms": [
+      "aci",
+      "fixed",
+      "hybrid",
+      "rolling",
+      "scheduled",
+      "triggered"
+    ]
+  },
+  "splits": {
+    "tune_fraction": 0.4,
+    "eval_fraction": 0.6,
+    "cutoffs": {
+      "apex_legends": "2022-04-22",
+      "path_of_exile": "2021-03-14",
+      "team_fortress_2": "2021-03-14"
+    }
+  }
+}
