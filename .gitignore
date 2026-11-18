@@ -1,0 +1,41 @@
+# Environment Secrets (CRITICAL: Never commit to Git)
+.env
+.env.local
+*.env
+!*.env.example
+*.pem
+*.key
+
+# Private Local Study Notes
+learnings/
+
+# Python Caches & Compiled Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Virtual Environments
+.venv/
+env/
+venv/
+ENV/
+
+# Data Files & Local Parquet Caches
+data/raw/*
+data/interim/*
+data/processed/*
+!data/*/.gitkeep
+
+# dbt Build Artifacts
+dbt_liveops/target/
+dbt_liveops/dbt_packages/
+dbt_liveops/logs/
+
+# Linters, OS & IDE Caches
+.sqlfluffcache
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
